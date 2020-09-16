@@ -41,6 +41,7 @@ def create():
         # store them in the object below.
         new_plant = {
             'name': '',
+            'variety': '',
             'photo_url': '',
             'date_planted': ''
         }
