@@ -48,9 +48,9 @@ def create():
         # TODO: Make an `insert_one` database call to insert the object into the
         # database's `plants` collection, and get its inserted id. Pass the 
         # inserted id into the redirect call below.
-        inserted_plant = mongo.db.plants.insert_one(new_plant)
+        insert_result = mongo.db.plants.insert_one(new_plant)
 
-        return redirect(url_for('detail', plant_id=inserted_plant.inserted_id))
+        return redirect(url_for('detail', plant_id=insert_result.inserted_id))
 
     else:
         return render_template('create.html')
@@ -61,17 +61,30 @@ def detail(plant_id):
 
     # TODO: Replace the following line with a database call to retrieve *one*
     # plant from the database, whose id matches the id passed in via the URL.
-    plant_to_show = ''
+    plant_to_show = mongo.db.plants.find_one({'_id' : ObjectId(plant_id)})
+    plant = {
+        'name': plant_to_show['name'],
+        'variety': plant_to_show['variety'],
+        'photo_url': plant_to_show['photo_url'],
+        'date_planted': plant_to_show['date_planted'],
+        'id': str(plant_to_show['_id'])
+    }
 
     # TODO: Use the `find` database operation to find all harvests for the
     # plant's id.
     # HINT: This query should be on the `harvests` collection, not the `plants`
     # collection.
-    harvests = ''
+    harvests = mongo.db.harvests.find({'plant_id': plant_id})
+    plant_harvests = []
+    for harvest in harvests:
+        plant_harvests.append({
+            'amount': harvest['quantity'],
+            'date': harvest['date']
+        })
 
     context = {
-        'plant' : plant_to_show,
-        'harvests': harvests
+        'plant' : plant,
+        'harvests': plant_harvests
     }
     return render_template('detail.html', **context)
 

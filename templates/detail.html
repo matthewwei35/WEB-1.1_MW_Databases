@@ -12,9 +12,9 @@
 #}
 
 <main>
-        <h1>Tomato</h1>
+        <h1>{{ plant['name'] }}</h1>
 
-        <img src="https://www.almanac.com/sites/default/files/styles/primary_image_in_article/public/image_nodes/tomatoes_helios4eos_gettyimages-edit.jpeg?itok=4KrW14a4">
+        <img src="{{ plant['photo_url'] }}">
 
         
 
@@ -22,17 +22,17 @@
             <h3>Info</h3>
 
             <strong>Date Planted</strong>
-            3/20/2020
+            {{ plant['date_planted'] }}
             <br><br>
 
             <strong>Variety</strong>
-            Early Girl
+            {{ plant['variety'] }}
             <br><br>
 
-            <a class="nav" href="/edit/123456">Edit Plant</a><br><br>
+            <a class="nav" href="/edit/{{ plant.id }}">Edit Plant</a><br><br>
         </section>
 
-        <form action="/harvest/123456" method="POST">
+        <form action="/harvest/{{ plant.id }}" method="POST">
             <fieldset>
                 <legend>Harvested:</legend>
                 
@@ -58,8 +58,9 @@
             <h3>Harvest History</h3>
 
             <ul>
-                <li>5/15/2020: Harvested 3 tomatoes</li>
-                <li>5/18/2020: Harvested 2 tomatoes</li>
+                {% for harvest in harvests %}
+                    <li>{{ harvest.date }}: Harvested {{ harvest.amount }} {{ plant['name'] }}</li>
+                {% endfor %}
             </ul>
         </section>
 

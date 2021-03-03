@@ -21,9 +21,9 @@
 
             {% for plant in plants %}
                 <div class="card">
-                    <a href="/plant/{{ plant_id }}"><img src="{{ plant['photo_url'] }}"></a>
+                    <a href="/plant/{{ plant['_id'] }}"><img src="{{ plant['photo_url'] }}"></a>
                     <div class="card-content">
-                        <a href="/plant/{{ plant_id }}">{{ plant['name'] }}</a>
+                        <a href="/plant/{{ plant['_id'] }}">{{ plant['name'] }}</a>
                     </div>
                 </div>
             {% endfor %}
