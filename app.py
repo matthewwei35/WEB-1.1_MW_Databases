@@ -83,7 +83,7 @@ def detail(plant_id):
         })
 
     context = {
-        'plant' : plant,
+        'plant': plant,
         'harvests': plant_harvests
     }
     return render_template('detail.html', **context)
@@ -97,13 +97,14 @@ def harvest(plant_id):
     # TODO: Create a new harvest object by passing in the form data from the
     # detail page form.
     new_harvest = {
-        'quantity': '', # e.g. '3 tomatoes'
-        'date': '',
+        'quantity': request.form.get('harvested_amount'), # e.g. '3 tomatoes'
+        'date': request.form.get('date_planted'),
         'plant_id': plant_id
     }
 
     # TODO: Make an `insert_one` database call to insert the object into the 
     # `harvests` collection of the database.
+    mongo.db.harvests.insert_one(new_harvest)
 
     return redirect(url_for('detail', plant_id=plant_id))
 
