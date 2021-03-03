@@ -15,22 +15,22 @@
 
             <label>
                 Plant's name:
-                <input type="text" name="plant_name" value="Tomato">
+                <input type="text" name="plant_name" value="{{ plant['name'] }}">
             </label>
             
             <label>
                 Plant's variety:
-                <input type="text" name="variety" value="Early Girl">
+                <input type="text" name="variety" value="{{ plant['variety'] }}">
             </label>
 
             <label>
                 Plant's photo URL:
-                <input type="url" name="photo" value="https://mypic.co/image.png">
+                <input type="url" name="photo" value="{{ plant['photo_url'] }}">
             </label>
 
             <label>
                 Date planted:
-                <input type="date" name="date_planted" value="2020-08-01">
+                <input type="date" name="date_planted" value="{{ plant['date_planted'] }}">
             </label>
 
             <input type="submit" class="submit" value="Submit!">

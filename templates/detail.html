@@ -64,7 +64,7 @@
             </ul>
         </section>
 
-        <form action="/delete/123456" method='POST' id="delete-form" onsubmit="return confirm_delete()">
+        <form action="/delete/{{ plant.id }}" method='POST' id="delete-form" onsubmit="return confirm_delete()">
             <input type="submit" class="nav" onclick="delete_modal()" value="Delete Plant">
         </form>
 </main>
